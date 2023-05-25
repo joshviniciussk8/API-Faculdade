@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32811.315
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FiapApi", "FiapApi\FiapApi.csproj", "{0D1810E8-043F-462A-8C8A-D01CF474E9E3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FiapApi", "FiapApi\FiapApi.csproj", "{0D1810E8-043F-462A-8C8A-D01CF474E9E3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebConsumoAPI", "..\WebConsumoAPI\WebConsumoAPI\WebConsumoAPI.csproj", "{D55B311E-ED6A-4419-958B-B2BA1A4EB366}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{0D1810E8-043F-462A-8C8A-D01CF474E9E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0D1810E8-043F-462A-8C8A-D01CF474E9E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0D1810E8-043F-462A-8C8A-D01CF474E9E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D55B311E-ED6A-4419-958B-B2BA1A4EB366}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D55B311E-ED6A-4419-958B-B2BA1A4EB366}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D55B311E-ED6A-4419-958B-B2BA1A4EB366}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D55B311E-ED6A-4419-958B-B2BA1A4EB366}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
