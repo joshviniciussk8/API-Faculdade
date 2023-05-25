@@ -17,27 +17,57 @@ public class AlunosRepository : IAlunosRepository
     }
     public async Task<IEnumerable<AlunosResponse>> BuscaAlunosAsync()
     {
-        string sql = @"select a.id, a.nome, a.usuario, a.senha from aluno a";
-        using (var con = new SqlConnection(connectionString) )
-        {
-            return await con.QueryAsync<AlunosResponse>(sql);
-        }
+        string sql = @"select a.id, a.nome, a.usuario from aluno a";
+        using var con = new SqlConnection(connectionString);
+        return await con.QueryAsync<AlunosResponse>(sql);
+        
     }
-    public Task<AlunosResponse> BuscaAlunoAsync(int id)
+    public async Task<AlunosResponse> BuscaAlunoAsync(int id)
     {
-        throw new NotImplementedException();
+        string sql = @"select a.id, a.nome, a.usuario, a.senha from aluno a where id = @Id";
+        using var con = new SqlConnection(connectionString);        
+        return await con.QueryFirstOrDefaultAsync<AlunosResponse>(sql, new {Id = id});
+        
     }
-    public Task<bool> AdicionaAsync(AlunosRequest request)
+    public async Task<string> BuscaSenhaAluno(int id)
     {
-        throw new NotImplementedException();
+        string sql = @"select a.senha from aluno a where id = @Id";
+        using var con = new SqlConnection(connectionString);
+        return await con.QueryFirstOrDefaultAsync<string>(sql, new { Id = id });
+
     }
-    public Task<bool> AtualizarAsync(AlunosRequest request, int id)
+    public async Task<AlunosResponse> BuscaAlunoUsuarioAsync(string usuario)
     {
-        throw new NotImplementedException();
+        string sql = @"select a.id, a.nome, a.usuario from aluno a where usuario = @Usuario";
+        using var con = new SqlConnection(connectionString);
+        return await con.QueryFirstOrDefaultAsync<AlunosResponse>(sql, new { Usuario = usuario });
+
     }
-    public Task<bool> DeletarAsync(int id)
+    public async Task<bool> AdicionaAsync(AlunosRequest request)
     {
-        throw new NotImplementedException();
+        string sql = @"insert into aluno(nome,usuario,senha)values(@nome,@usuario,@senha)";
+        using var con = new SqlConnection(connectionString);        
+        return await con.ExecuteAsync(sql, request) > 0;
+        
+    }
+    public async Task<bool> AtualizarAsync(AlunosRequest request, int id)
+    {
+        string sql = @"update aluno set nome=@nome,usuario=@usuario,senha=@senha where id = @Id ";
+        var parametros = new DynamicParameters();
+        parametros.Add("nome", request.nome);
+        parametros.Add("usuario", request.usuario); 
+        parametros.Add("senha", request.senha);
+        parametros.Add("Id", id);
+        using var con = new SqlConnection(connectionString);
+        return await con.ExecuteAsync(sql, parametros) > 0;
+    }
+    public async Task<bool> DeletarAsync(int id)
+    {
+        string sql = @"delete from aluno where id = @Id ";
+        var parametros = new DynamicParameters();
+        
+        using var con = new SqlConnection(connectionString);
+        return await con.ExecuteAsync(sql, new {Id = id}) > 0;
     }
 }
 
